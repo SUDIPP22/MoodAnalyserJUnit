@@ -1,7 +1,7 @@
 package com.bridgelabz;
 
 /**
- * Purpose : Implementing Mood Analyser Program using constructor and handling NullPointerException
+ * Purpose : Implementing Mood Analyser Program using constructor and handling Exception
  * @author SUDIP PANJA
  * @version 11.0.11
  * @since 2021-09-14
@@ -27,24 +27,25 @@ public class MoodAnalyser {
      * @param message This is the first parameter used to store the message
      * @return returns actual value from analyseMood method
      */
-    public String analyseMood(String message) {
+    public String analyseMood(String message) throws MoodAnalysisException {
         this.message = message;
         return analyseMood();
     }
 
     /**
      * Purpose : This method is created for implementing test cases which uses parameterized constructor
-     * Condition : Handle NullPointerException using try-catch block
+     * Condition 1 : Handle NullPointerException using try-catch block
+     * Condition 2 : Throws MoodAnalysisException for null message
      * @return returns actual value
      */
-    public String analyseMood() {
+    public String analyseMood() throws MoodAnalysisException {
         try {
             if (message.contains("Sad"))
                 return "SAD";
             else
                 return "HAPPY";
         } catch (NullPointerException exception) {
-            return "HAPPY";
+            throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL, "Please enter proper message");
         }
     }
 }
